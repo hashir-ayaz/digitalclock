@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+    <style>
+      body {
+        background-color: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .card {
+        background-color: rgb(158, 158, 228);
+        height: 200px;
+        width: 400px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .time {
+        text-align: center;
+        font-size: 70px;
+        padding: 10px;
+        margin: 0;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <p class="time" id="time">HR:MM:SS</p>
+    </div>
+    <script>
+      function updateTime() {
+        let time = new Date();
+        let hours = time.getHours();
+        let minutes = time.getMinutes();
+        let seconds = time.getSeconds();
+        //   let timeString = document.getElementById("time");
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+
+        let timeString = document.getElementById("time");
+        timeString.textContent = `${hours}:${minutes}:${seconds}`;
+      }
+
+      setInterval(() => {
+        updateTime();
+      }, 1000);
+    </script>
+  </body>
+</html>
