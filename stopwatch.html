@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Digital Clock</title>
+    <title>Digital Stop Watch</title>
     <style>
       body {
         background-color: grey;
@@ -38,33 +38,25 @@
       <p class="time" id="time">HR:MM:SS</p>
     </div>
     <script>
-      function updateTime() {
-        let time = new Date();
-        let hours = time.getHours();
-        let minutes = time.getMinutes();
-        let seconds = time.getSeconds();
-        let ampm = hours >= 12 ? "PM" : "AM"; // Determine if it's AM or PM
-
-        // Convert hours to 12-hour format
-        hours = hours % 12;
-        hours = hours ? hours : 12; // 0 should be displayed as 12
-
-        if (hours < 10) {
-          hours = "0" + hours;
+      function updateStopWatch(hours, minutes, seconds) {
+        //decrease the second count every second until all 3 variables are 0
+        seconds--;
+        if (seconds < 0) {
+          minutes--;
+          seconds = 60;
+          if (minutes < 0) {
+            minutes = 60;
+            hours--;
+          }
         }
-        if (minutes < 10) {
-          minutes = "0" + minutes;
+        if (hours === 0 && minutes === 0 && seconds === 0) {
+          console.log("times up!");
         }
-        if (seconds < 10) {
-          seconds = "0" + seconds;
-        }
-
-        let timeString = document.getElementById("time");
-        timeString.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+        console.log(hours, minutes, seconds);
       }
 
       setInterval(() => {
-        updateTime();
+        updateStopWatch(0, 0, 30);
       }, 1000);
     </script>
   </body>
