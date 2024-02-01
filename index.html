@@ -14,7 +14,7 @@
       }
 
       .card {
-        background-color: rgb(158, 158, 228);
+        background-color: rgb(88, 88, 255);
         height: 200px;
         width: 400px;
         border-radius: 10px;
@@ -47,7 +47,7 @@
 
         // Convert hours to 12-hour format
         hours = hours % 12;
-        hours = hours ? hours : 12; // 0 should be displayed as 12
+        hours = hours === 0 ? 12 : hours; // 0 should be displayed as 12
 
         if (hours < 10) {
           hours = "0" + hours;

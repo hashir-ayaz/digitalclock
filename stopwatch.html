@@ -14,7 +14,7 @@
       }
 
       .card {
-        background-color: rgb(158, 158, 228);
+        background-color: rgb(126, 244, 58);
         height: 200px;
         width: 400px;
         border-radius: 10px;
@@ -28,8 +28,8 @@
         font-size: 70px;
         padding: 10px;
         margin: 0;
-        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-          "Lucida Sans", Arial, sans-serif;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
       }
     </style>
   </head>
@@ -38,26 +38,36 @@
       <p class="time" id="time">HR:MM:SS</p>
     </div>
     <script>
-      function updateStopWatch(hours, minutes, seconds) {
-        //decrease the second count every second until all 3 variables are 0
+      let hours = 0;
+      let minutes = 0;
+      let seconds = 5;
+
+      function updateStopWatch(timeString) {
         seconds--;
+
         if (seconds < 0) {
           minutes--;
-          seconds = 60;
+          seconds = 59;
+
           if (minutes < 0) {
-            minutes = 60;
             hours--;
+            minutes = 59;
+
+            if (hours < 0) {
+              clearInterval(interval);
+              timeString.innerText = `Times Up!`;
+              console.log("Times up!");
+              return;
+            }
           }
         }
-        if (hours === 0 && minutes === 0 && seconds === 0) {
-          console.log("times up!");
-        }
+
+        timeString.innerText = `${hours}:${minutes}:${seconds}`;
         console.log(hours, minutes, seconds);
       }
 
-      setInterval(() => {
-        updateStopWatch(0, 0, 30);
-      }, 1000);
+      let timeString = document.getElementById("time");
+      let interval = setInterval(() => updateStopWatch(timeString), 1000);
     </script>
   </body>
 </html>
